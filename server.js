@@ -27,19 +27,19 @@ app.get('/', (req, res) => {
     res.send('<b>Welcome to the Express Lab</b>'); //not requiered in the assignment but figured for lab. Use the root for welcome to lab
 });
 
-// app.get('/greetings/Christy', (req, res) => {
-//     res.send('<b>Hello There Christy!</b>');
-// });
+app.get('/greetings/Christy', (req, res) => {
+    res.send('<b>Hello There Christy!</b>');
+});
 
-// app.get('/roll/:num', (req, res) => {
-//     let num = req.params.num;
-//     let roll = Math.floor(Math.random() * num) + 1; //random number
-//     if (isNaN(num)) {  //not a number...checking
-//         res.send('You must specify a number');
-//     } else {
-//         res.send(`You rolled a ${roll}`); //display the answer if number. template literal
-//     }
-// });
+app.get('/roll/:num', (req, res) => {
+    let num = req.params.num;
+    let roll = Math.floor(Math.random() * num) + 1; //random number
+    if (isNaN(num)) {  //not a number...checking
+        res.send('You must specify a number');
+    } else {
+        res.send(`You rolled a ${roll}`); //display the answer if number. template literal
+    }
+});
 
 
 app.get('/collectibles/:index', (req, res) => { 
@@ -52,16 +52,16 @@ app.get('/collectibles/:index', (req, res) => {
         res.send(`So you want the ${item.name}? For ${item.price}, it can be yours!`);
     });
     
-    app.get('/hello', (req, res) => {
-        res.send(`Hello there, ${req.query.name}! I hear you are ${req.query.age} years old!`);
-    });
+//     app.get('/hello', (req, res) => {
+//         res.send(`Hello there, ${req.query.name}! I hear you are ${req.query.age} years old!`);
+//     });
     //Q4 filter by the minumum price, shoes included greater that or equal to min price
     // max price  less than or equal to max price
     // type of shoe: shows only shoes of the specified type
     //if non full shoe list. 
 app.get('/shoes', (req, res) => {
-    let shoesToShow = [...shoes]; //spread operator shallos copy of shoes array
-    if (req.query['min-price']) { //
+    let shoesToShow = [...shoes]; //spread operator shallow copy of shoes array
+    if (req.query['min-price']) { // creaating the array 
         const minPrice = parseInt(req.query['min-price']);
         shoesToShow = shoesToShow.filter(shoe => shoe.price >= minPrice);
     }
@@ -74,7 +74,7 @@ app.get('/shoes', (req, res) => {
         shoesToShow = shoesToShow.filter(shoe => shoe.type === type);
     }
     
-    res.json(shoesToShow); //differnt method that same as send...sends the json to the client// 
+    res.send(shoesToShow); //differnt method that same as send...sends the json to the client// 
 });
-//ask about it or touch on it in a bit
+
     
