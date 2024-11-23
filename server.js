@@ -52,7 +52,7 @@ app.get('/collectibles/:index', (req, res) => {
         res.send(`So you want the ${item.name}? For ${item.price}, it can be yours!`);
     });
     
-//     app.get('/hello', (req, res) => {
+    app.get('/hello', (req, res) => {
 //         res.send(`Hello there, ${req.query.name}! I hear you are ${req.query.age} years old!`);
 //     });
     //Q4 filter by the minumum price, shoes included greater that or equal to min price
@@ -74,7 +74,7 @@ app.get('/shoes', (req, res) => {
         shoesToShow = shoesToShow.filter(shoe => shoe.type === type);
     }
     
-    res.send(shoesToShow); //differnt method that same as send...sends the json to the client// 
+    res.send(shoesToShow); 
 });
 
     
