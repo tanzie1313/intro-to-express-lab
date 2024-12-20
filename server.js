@@ -27,20 +27,20 @@ app.get('/', (req, res) => {
     res.send('<b>Welcome to the Express Lab</b>'); //not requiered in the assignment but figured for lab. Use the root for welcome to lab
 });
 
-app.get('/greetings/Christy', (req, res) => {
-    res.send('<b>Hello There Christy!</b>');
+app.get('/greetings/:name', (req, res) => {
+    res.send(`Hello There, ${req.params.name}!`);
 });
+
 
 app.get('/roll/:num', (req, res) => {
-    let num = req.params.num;
-    let roll = Math.floor(Math.random() * num) + 1; //random number
-    if (isNaN(num)) {  //not a number...checking
-        res.send('You must specify a number');
-    } else {
-        res.send(`You rolled a ${roll}`); //display the answer if number. template literal
-    }
-});
 
+const num = parseInt(req.params.num, 10);
+if (isNaN(num) || num <= 0) {
+  return res.status(400).send('You must specify a positive number.');
+}
+const roll = Math.floor(Math.random() * num) + 1;
+res.send(`You rolled a ${roll}`);
+});
 
 app.get('/collectibles/:index', (req, res) => { 
     const index =parseInt(req.params.index);
@@ -52,9 +52,9 @@ app.get('/collectibles/:index', (req, res) => {
         res.send(`So you want the ${item.name}? For ${item.price}, it can be yours!`);
     });
     
-    app.get('/hello', (req, res) => {
-//         res.send(`Hello there, ${req.query.name}! I hear you are ${req.query.age} years old!`);
-//     });
+app.get('/hello', (req, res) => {
+    res.send(`Hello there, ${req.query.name}! I hear you are ${req.query.age} years old!`);
+});
     //Q4 filter by the minumum price, shoes included greater that or equal to min price
     // max price  less than or equal to max price
     // type of shoe: shows only shoes of the specified type
